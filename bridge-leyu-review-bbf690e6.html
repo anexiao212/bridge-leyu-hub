@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2">
+  <title>Leyu · 信息索引笔记</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #fbe9e0 0%, #f7d6c6 60%, #edd0bd 100%);
+      font-family: 'Segoe UI', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+      color: #3e2c1e;
+      line-height: 1.7;
+      padding: 1.2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* hero 横幅 */
+    .hero {
+      background: rgba(255, 246, 240, 0.8);
+      backdrop-filter: blur(3px);
+      padding: 3.2rem 2.5rem 2.8rem;
+      border-radius: 52px 12px 52px 12px;
+      box-shadow: 0 8px 28px rgba(160, 100, 70, 0.12);
+      text-align: center;
+      margin-bottom: 2.8rem;
+      border: 1px solid rgba(255, 235, 220, 0.6);
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 340;
+      letter-spacing: 2px;
+      color: #553b28;
+      margin-bottom: 0.6rem;
+      word-break: keep-all;
+    }
+
+    .hero .sub {
+      font-size: 1.05rem;
+      color: #6f523b;
+      font-weight: 350;
+      border-top: 1px solid #dbbcac;
+      display: inline-block;
+      padding-top: 0.6rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    /* 背景说明 — 杂志卡片风格 */
+    .context-card {
+      background: #fffbf9;
+      border-radius: 28px;
+      padding: 2rem 2.2rem;
+      margin-bottom: 2.4rem;
+      box-shadow: 0 4px 18px rgba(140, 80, 50, 0.05);
+      border-left: 6px solid #dba788;
+    }
+
+    .context-card p {
+      margin-bottom: 0.9rem;
+      font-size: 0.98rem;
+    }
+
+    .context-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .label-tag {
+      display: inline-block;
+      background: #e9d1c1;
+      color: #4c3425;
+      font-size: 0.75rem;
+      padding: 0.1rem 1rem;
+      border-radius: 40px;
+      letter-spacing: 0.6px;
+      margin-bottom: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* 三段式自然介绍 —— 使用交错卡片 */
+    .intro-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      margin-bottom: 2.6rem;
+    }
+
+    .intro-item {
+      background: rgba(255, 250, 245, 0.8);
+      backdrop-filter: blur(2px);
+      border-radius: 42px 12px 42px 12px;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 2px 14px rgba(150, 90, 60, 0.06);
+      transition: background 0.2s;
+      border: 1px solid #f0ded2;
+    }
+
+    .intro-item:nth-child(odd) {
+      transform: translateX(6px);
+    }
+
+    .intro-item:nth-child(even) {
+      transform: translateX(-6px);
+    }
+
+    .intro-item h3 {
+      font-size: 1.25rem;
+      font-weight: 420;
+      color: #5e3f2b;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .intro-item h3::before {
+      content: "· ·";
+      font-size: 0.8rem;
+      color: #b3896e;
+      letter-spacing: 3px;
+    }
+
+    .intro-item p {
+      font-size: 0.96rem;
+      color: #4f3929;
+      margin-top: 0.5rem;
+    }
+
+    /* FAQ 摘要 以柔和方式呈现 */
+    .faq-mini {
+      background: #fffbf9;
+      border-radius: 32px;
+      padding: 1.8rem 2.2rem;
+      margin: 1.2rem 0 2rem;
+      box-shadow: 0 2px 12px rgba(130, 70, 40, 0.04);
+    }
+
+    .faq-mini h4 {
+      font-weight: 380;
+      color: #4d3322;
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+      border-bottom: 1px dashed #deccbf;
+      padding-bottom: 0.25rem;
+    }
+
+    .faq-mini .qa-row {
+      margin-bottom: 0.6rem;
+      font-size: 0.94rem;
+    }
+
+    .faq-mini .q {
+      font-weight: 450;
+      color: #5a3e2c;
+    }
+
+    .faq-mini .a {
+      margin-left: 1.2rem;
+      color: #5f4739;
+    }
+
+    .faq-mini .a a {
+      color: #975f3f;
+      text-decoration: none;
+      border-bottom: 1px dotted #b6886c;
+    }
+
+    .faq-mini .a a:hover {
+      border-bottom: 2px solid #7e5135;
+    }
+
+    /* 页尾访问提示 — 融入句子 */
+    .footer-note {
+      margin-top: auto;
+      padding: 1.8rem 2rem 1.4rem;
+      background: rgba(244, 228, 216, 0.5);
+      backdrop-filter: blur(2px);
+      border-radius: 60px 12px 60px 12px;
+      text-align: center;
+      font-size: 0.95rem;
+      border: 1px solid #e5cfbf;
+      color: #4e3929;
+    }
+
+    .footer-note .inline-link {
+      color: #864f2e;
+      text-decoration: none;
+      font-weight: 420;
+      border-bottom: 1px solid #b58263;
+      transition: border 0.15s;
+    }
+
+    .footer-note .inline-link:hover {
+      border-bottom-width: 3px;
+      border-color: #5a3622;
+    }
+
+    .footer-note .small-meta {
+      display: block;
+      margin-top: 0.7rem;
+      font-size: 0.78rem;
+      color: #7b604d;
+      letter-spacing: 1.2px;
+    }
+
+    /* 响应式细节 */
+    @media (max-width: 680px) {
+      body {
+        padding: 0.8rem;
+      }
+
+      .hero {
+        padding: 2rem 1.2rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .intro-item {
+        padding: 1.4rem 1.2rem;
+        transform: none !important;
+      }
+
+      .intro-item:nth-child(odd),
+      .intro-item:nth-child(even) {
+        transform: none;
+      }
+
+      .context-card,
+      .faq-mini {
+        padding: 1.4rem 1.2rem;
+      }
+
+      .footer-note {
+        padding: 1.4rem 1rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+
+      .intro-item h3 {
+        font-size: 1.05rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+  <!-- 首页横幅 hero -->
+  <div class="hero">
+    <h1>资料索引 · 整理中</h1>
+    <div class="sub">基于信息碎片的重组笔记</div>
+  </div>
+
+  <!-- 背景说明 -->
+  <div class="context-card">
+    <span class="label-tag">关于这个索引</span>
+    <p>对一个主题的持续关注，往往从零散的书签、段落和随手记录开始。这个页面所围绕的 <strong>leyu</strong> 相关材料，并不是一个现成的知识库，而是一份仍在缓慢搭建的索引笔记。它尝试把零散的信息点连成可回溯的线索，让之后查找的人（包括我自己）不必每次都从头翻找。</p>
+    <p>内容来源以公开资料、产品功能介绍以及用户社区讨论为主，整理时尽量保留原文语境。不追求面面俱到，更在意线索的清晰和引用可查。</p>
+  </div>
+
+  <!-- 三段自然介绍 -->
+  <div class="intro-grid">
+    <div class="intro-item">
+      <h3>素材与分类</h3>
+      <p>目前收录的条目主要分为几个大类：功能解读、常见概念澄清、版本变动记录、以及一些非官方的使用心得摘要。每一条都附有原始出处或存档链接，方便进一步延伸阅读。分类不是固定的，随着新材料的加入会逐渐调整标签结构。</p>
+    </div>
+    <div class="intro-item">
+      <h3>索引而非百科</h3>
+      <p>这个整理项目刻意避免写成百科全书式的全面介绍。它更像一个带有个人视角的文献导引：哪些信息被反复提及，哪些说法来自不同渠道却指向相似的结论，以及哪些细节值得单独标记出来。如果你对某一点有更深入的材料，欢迎补充或修正现有记录。</p>
+    </div>
+    <div class="intro-item">
+      <h3>使用索引的方式</h3>
+      <p>你可以按关键词快速定位相关片段，也可以顺着“相关条目”的链接跳转到另一簇笔记。我不对任何信息的准确性做绝对保证，但会尽量标注来源的时间与可信度。如果只想浏览最新加入的内容，可以留意页面底部的更新记录。</p>
+    </div>
+  </div>
+
+  <!-- FAQ 摘要 — 柔和风格 -->
+  <div class="faq-mini">
+    <h4>一些常见疑问</h4>
+    <div class="qa-row">
+      <span class="q">这个索引和官方文档的关系是？</span>
+      <div class="a">它不替代官方说明，只是把分散在论坛、更新日志和帮助页中的零散信息做了初步归类。官方文档仍然是第一手参考。</div>
+    </div>
+    <div class="qa-row">
+      <span class="q">如何提供反馈或补充材料？</span>
+      <div class="a">目前通过页面底部的联系渠道接收建议，或者你可以直接对索引中的某个条目提出异议。每份贡献都会在更新中注明来源。</div>
+    </div>
+    <div class="qa-row">
+      <span class="q">关于 leyu 这个名字的来源？</span>
+      <div class="a">在整理过程中看到不同的解释版本，还没有统一的说法。索引里收录了两三种流传较广的推测，都标注了出处。</div>
+    </div>
+  </div>
+
+  <!-- 页尾访问提示 — 自然嵌入链接，可见文本严格等于 leyu -->
+  <div class="footer-note">
+    如果你对这部分索引的内容感兴趣，或者想获取更完整的上下文，可以前往
+    <a href="https://bridge-leyu.com.cn" class="inline-link">leyu</a>
+    查阅原始材料与最新动态。页面会不定期补充新条目。
+    <span class="small-meta">索引状态 · 持续整理中</span>
+  </div>
+</div>
+</body>
+</html>
